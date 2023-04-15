@@ -22,7 +22,7 @@
     "url": "https://github.com/knocklabs/knock-node/issues"
   },
   "scripts": {
-    "build": "tsc -p tsconfig.json",
+    "build": "tsc -p tsconfig.json && denoify",
     "lint": "tslint -p tsconfig.json -c tslint.json",
     "test": "jest",
     "test:watch": "jest --watch",
@@ -45,6 +45,7 @@
   },
   "dependencies": {
     "axios": "^0.21.1",
+    "denoify": "^1.5.3",
     "jsonwebtoken": "^9.0.0"
   }
 }
