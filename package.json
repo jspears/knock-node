@@ -26,6 +26,7 @@
     "lint": "tslint -p tsconfig.json -c tslint.json",
     "test": "jest",
     "test:watch": "jest --watch",
+    "test:deno": "deno run --allow-net --allow-env --allow-read --allow-write --unstable  deno_dist/index.ts",
     "prettier": "prettier \"src/**/*.{js,ts,tsx}\" --check",
     "format": "prettier \"src/**/*.{js,ts,tsx}\" --write",
     "prepublishOnly": "npm run build"
