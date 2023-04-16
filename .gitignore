@@ -1,5 +1,2 @@
-.DS_Store
-.npmrc
-node_modules
-yarn-error.log
-dist
+
+/node_modules
