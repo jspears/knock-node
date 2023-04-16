@@ -1,7 +1,6 @@
 import axios, { AxiosResponse, AxiosInstance } from "axios";
 import jwt from 'jsonwebtoken';
-
-import {getPackage} from "./package";
+import {VERSION as version} from "./version";
 import {
   BadRequestException,
   GenericServerException,
@@ -22,7 +21,6 @@ import { Messages } from "./resources/messages";
 import { Tenants } from "./resources/tenants";
 
 const DEFAULT_HOSTNAME = "https://api.knock.app";
-const version = getPackage().version as string;
 class Knock {
   readonly host: string;
   private readonly client: AxiosInstance;
