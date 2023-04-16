@@ -1,5 +1,4 @@
-import { Buffer } from "node:buffer";
-import axios, { AxiosResponse, AxiosInstance } from "npm:axios@0.21.4";
+import axios, { AxiosResponse, AxiosInstance } from "https://deno.land/x/redaxios@0.5.1/mod.ts";
 import jwt from 'npm:jsonwebtoken@9.0.0';
 import {VERSION as version} from "./version.ts";
 import {
@@ -20,7 +19,7 @@ import { BulkOperations } from "./resources/bulk_operations/index.ts";
 import { Objects } from "./resources/objects/index.ts";
 import { Messages } from "./resources/messages/index.ts";
 import { Tenants } from "./resources/tenants/index.ts";
-import { getEnv,emitWarning } from "./port.ts";
+import { getEnv,emitWarning,bufferFrom } from "./port.ts";
 
 const DEFAULT_HOSTNAME = "https://api.knock.app";
 class Knock {
@@ -187,7 +186,7 @@ function prepareSigningKey(key?: string): string {
   if (!maybeSigningKey) throw new NoSigningKeyProvidedException();
   if (maybeSigningKey.startsWith("-----BEGIN")) return maybeSigningKey;
   // LS0tLS1CRUdJTi is the base64 encoded version of "-----BEGIN"
-  if (maybeSigningKey.startsWith("LS0tLS1CRUdJTi")) return Buffer.from(maybeSigningKey, "base64").toString("utf-8");
+  if (maybeSigningKey.startsWith("LS0tLS1CRUdJTi")) return bufferFrom(maybeSigningKey, "base64").toString("utf-8");
 
   throw new NoSigningKeyProvidedException();
 }

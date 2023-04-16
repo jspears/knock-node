@@ -1,0 +1,5 @@
+{
+  "ports": {
+    "axios": "https://deno.land/x/redaxios@0.5.1/mod.ts"
+  }
+}
