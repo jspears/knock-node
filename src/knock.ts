@@ -19,6 +19,7 @@ import { BulkOperations } from "./resources/bulk_operations";
 import { Objects } from "./resources/objects";
 import { Messages } from "./resources/messages";
 import { Tenants } from "./resources/tenants";
+import { getEnv,emitWarning } from "./port";
 
 const DEFAULT_HOSTNAME = "https://api.knock.app";
 class Knock {
@@ -36,7 +37,7 @@ class Knock {
 
   constructor(readonly key?: string, readonly options: KnockOptions = {}) {
     if (!key) {
-      this.key = process.env.KNOCK_API_KEY;
+      this.key = getEnv('KNOCK_API_KEY');
 
       if (!this.key) {
         throw new NoApiKeyProvidedException();
@@ -171,17 +172,17 @@ class Knock {
   }
 
   emitWarning(warning: string) {
-    if (typeof process.emitWarning !== "function") {
+    if (typeof emitWarning !== "function") {
       //  tslint:disable:no-console
       return console.warn(`Knock: ${warning}`);
     }
 
-    return process.emitWarning(warning, "Knock");
+    return emitWarning(warning, "Knock");
   }
 }
 
 function prepareSigningKey(key?: string): string {
-  const maybeSigningKey = key ?? process.env.KNOCK_SIGNING_KEY;
+  const maybeSigningKey = key ?? getEnv('KNOCK_SIGNING_KEY');
   if (!maybeSigningKey) throw new NoSigningKeyProvidedException();
   if (maybeSigningKey.startsWith("-----BEGIN")) return maybeSigningKey;
   // LS0tLS1CRUdJTi is the base64 encoded version of "-----BEGIN"

@@ -18,5 +18,5 @@
     "outDir": "./dist",
   },
   "include": ["src/**/*"],
-  "exclude": ["src/**/*.spec.ts", "dist"]
+  "exclude": ["src/**/*.spec.ts", "dist","src/**/*.deno.ts"]
 }
